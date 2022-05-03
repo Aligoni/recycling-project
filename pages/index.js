@@ -1,11 +1,16 @@
-import 'tailwindcss/tailwind.css'
-
-import Head from 'next/head'
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.scss'
 import { FaFacebookF, FaGoogle, FaInstagram, FaTwitter } from 'react-icons/fa'
-import { IconContext } from 'react-icons'
+import { IconContext } from 'react-icons';
+import { articles } from '../constants/articles';
+
+import 'tailwindcss/tailwind.css'
 
 export default function Home() {
+
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,23 +19,49 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/assets/home-background.jpg" alt="" width="100%" height="100%"/>
+        <img src="/assets/backdrop.jpg" alt="" width="100%" height="100%"/>
         
         <div className={styles.overlay}>
           <div className={styles.top +" flex w-full justify-between"}>
             <img className="ml-4 mb-2 w-20 h-20 cursor-pointer" src="/logo.png" alt="" />
             <div className={`${styles.navtext} flex items-center justify-between`}>
-              <p className={`${styles.item}`}>Articles</p>
-              <p className={`${styles.item}`}>About</p>
+              <p className={`${styles.item}`} onClick={() => router.push('/articles')}>Articles</p>
+              <p className={`${styles.item}`} onClick={() => router.push('/about')}>About</p>
               <p className={`${styles.item}`}>Contact</p>
             </div>
           </div>
           <div className="flex-1 flex flex-col justify-center items-center">
             <h1 className={styles.header}>Recycle-tronics!</h1>
-            <h5 className={styles.headerMini}>The website will allow people to track and identify the effects that computing machinery has on the environment. This will be showcased using statistics from all over a particular area, or from a broader spectrum, various places in the country or all over the world.</h5>
+            <h5 className={styles.headerMini}>
+              Help bring change to the world 
+            </h5>
           </div>
         </div>
       </main>
+
+      <section className='my-8'>
+        <h1 className='text-center text-3xl'>Top Articles</h1>
+        <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
+          {
+            articles.map((article, i) => (
+              <div className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
+                <div className=''>
+                  <img src={article.img} className='' />
+                </div>
+                <div className='px-4 py-2'>
+                  <div className='flex justify-between items-center'>
+                    <p className='text-sm text-gray-500'>{article.author}</p>
+                    <p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+                  </div>
+                  <p className='text-3xl my-2'>{article.title}</p>
+                  <p>{article.preview}</p>
+                  <p className='text-sm text-gray-500 mt-2'>{article.read}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
 
       <footer className={styles.footer}>
         <div className="flex justify-evenly pt-8" style={{ backgroundColor: "rgb(19, 19, 19)" }}>

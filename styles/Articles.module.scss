@@ -1,0 +1,19 @@
+
+.articles-cont {
+    
+    .content {
+        @apply my-8;
+
+        form {
+            @apply w-full flex justify-center items-center;
+
+            input {
+                @apply border-[1px] border-solid border-black px-4 py-2 rounded-lg w-3/5 lg:w-2/5;
+            }
+
+            button {
+                @apply ml-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-slate-600;
+            }
+        }
+    }
+}
