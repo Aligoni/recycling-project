@@ -40,7 +40,7 @@ export default function Home() {
       </main>
 
       <section className='my-8'>
-        <h1 className='text-center text-3xl'>Top Articles</h1>
+        <h1 className='text-center text-3xl underline'>Top Articles</h1>
         <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
           {
             articles.map((article, i) => (

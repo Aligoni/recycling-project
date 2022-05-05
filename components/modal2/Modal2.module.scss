@@ -1,0 +1,213 @@
+.modal {
+  &__content {
+    background-color: rgba(211, 25, 25, 0.26);
+  }
+}
+/* 
+  img{
+      max-width :100%;
+      height auto
+  }
+  */
+.modal {
+  height: 100vh;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  display: none;
+  left: 0;
+  width: 100%;
+  &__overlay_hidden {
+    visibility: hidden;
+    display: none;
+  }
+  &__overlay {
+    z-index: 3000;
+    background-color: rgba(161, 161, 161, 0.514);
+
+    height: 100%;
+    width: 100%;
+  }
+  &__button {
+    display: inline-block;
+    background-color: green;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+  }
+  &__button:hover {
+    background-color: lightgreen;
+  }
+  &__container {
+    background-color: rgba(191, 245, 196, 0.808);
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    overflow: hidden;
+    transition: all 0.3s;
+    z-index: 1000;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+  &__content {
+    position: relative;
+    background-color: white;
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    border-radius: 1rem 1rem 0 0;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+    padding-bottom: 2rem;
+
+    transform: scale(0.5) translateY(10%);
+  }
+  &__imgcontainer {
+    width: 100%;
+    margin: auto;
+  }
+  &__img {
+    width: 150px;
+    max-width: 100%;
+    margin-bottom: 0.75rem;
+    display: unset !important;
+  }
+  &__close {
+    color: white;
+    background-color: black;
+    border-radius: 0.25rem;
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+    position: fixed;
+    top: 0.8rem;
+    right: 0.8rem;
+    cursor: pointer;
+  }
+  &__icon {
+    font-size: 1.25rem;
+    width: 100%;
+    height: 100%;
+  }
+  &__title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  @media screen and (min-width: 767px) and (max-width: 1500px) {
+    &__content {
+      margin: auto;
+      width: 90%;
+
+      border-radius: 1.25rem;
+    }
+    &__img {
+      width: 170px;
+    }
+  }
+
+  @media screen and (min-width: 1500px) {
+    &__content {
+      margin: auto;
+      width: 90%;
+    }
+  }
+  @media screen and (min-width: 576px) and (max-width: 767px) {
+    &__content {
+      margin: auto;
+      width: 90%;
+
+      border-radius: 1.25rem;
+    }
+    &__img {
+      width: 170px;
+    }
+  }
+  @media screen and (min-width: 300px) and (max-width: 575px) {
+    &__content {
+      margin: auto;
+      width: 90%;
+
+      border-radius: 1.25rem;
+    }
+    &__img {
+      width: 170px;
+    }
+  }
+}
+.show__modal {
+  visibility: visible;
+  opacity: 1;
+  display: grid;
+}
+.show__modal .modal__content {
+  transform: scale(1) translateY(0);
+}
+.make {
+  position: relative;
+  z-index: 4000;
+}
+.make2 {
+  position: relative;
+  z-index: 4000;
+  padding: 0.4rem 1.3rem;
+  background-color: darkgreen;
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 2px rgba(19, 18, 18, 0.829);
+  outline: none;
+  border: none;
+  margin: 0.5rem;
+}
+
+.login {
+  &__createadmin {
+    width: 100%;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    text-align: center;
+  }
+  &__box {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    background-color: #fff;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  }
+  &__input {
+    border: none;
+    outline: none;
+    font-size: var(--normal-font-size);
+    font-weight: 300;
+    width: 100%;
+
+    &::placeholder {
+      font-size: var(--normal-font-size);
+      font-family: var(--body-font);
+      color: darkgreen;
+    }
+  }
+  &__center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2.5rem;
+  }
+  &__button {
+    display: block;
+    padding: 0.6rem 1rem;
+    margin: 2rem 0;
+    background-color: darkgreen;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 0.5rem;
+  }
+}

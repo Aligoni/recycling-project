@@ -1,0 +1,16 @@
+.grid {
+  display: grid;
+  overflow-y: scroll;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  grid-template-rows: repeat(2, max-content);
+  @media screen and (min-width: 969px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: 590px) and (max-width: 968px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: 367px) and (max-width: 590px) {
+    grid-template-columns: 1fr;
+  }
+}

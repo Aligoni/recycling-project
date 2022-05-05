@@ -1,0 +1,12 @@
+.container {
+  max-width: 968px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 90px auto;
+  height: 100%;
+}
+.flex {
+  display: flex;
+  position: relative;
+}

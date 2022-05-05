@@ -1,0 +1,122 @@
+.container {
+  max-width: 968px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.layout {
+  position: relative;
+  width: max-content;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 2fr 10fr;
+  height: 100vh;
+}
+.header {
+  width: 90px;
+  height: var(--header-height);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  background-color: white;
+  z-index: 101;
+  transition: 0.5s;
+
+  margin-left: auto;
+  margin-right: auto;
+  &__toggle {
+    color: black;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    justify-self: center;
+  }
+}
+.l_navbar {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: var(--nav-width);
+  // width :calc(var(--nav-width) + 156px);
+  height: 100vh;
+  background-color: darkgreen;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  padding: 0.5rem 0 0 0;
+  transition: all 0.5s;
+  z-index: var(--z-fixed);
+}
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+
+  &__test {
+    width: 100%;
+    margin-top: 4rem;
+  }
+  &__logo,
+  &__link {
+    display: grid;
+    grid-template-rows: max-content max-content;
+    align-items: center;
+    column-gap: 1rem;
+    padding: 0.5rem 0 0.5rem 0;
+  }
+  &__logo {
+    margin-bottom: 0.5rem;
+    justify-self: center;
+  }
+  &__logo_icon {
+    font-size: 1.25rem;
+    justify-self: center;
+  }
+  &__logo_name {
+    font-weight: 600;
+    justify-self: center;
+    font-size: 12px;
+  }
+  &__link {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      color: whitesmoke;
+    }
+  }
+  &__icon {
+    font-size: 1.25rem;
+    justify-self: center;
+  }
+  &__name {
+    justify-self: center;
+  }
+}
+.active {
+  background: white;
+  color: darkgreen;
+  transform: scale(1.05);
+
+  &:hover {
+    background: rgb(0, 7, 0);
+    color: white;
+  }
+}

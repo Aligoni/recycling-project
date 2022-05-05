@@ -1,0 +1,56 @@
+.login {
+  max-width: 968px;
+  text-align: center;
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  row-gap: 1.5rem;
+  margin: auto;
+  &__title {
+    padding: 0.5rem;
+  }
+  &__createadmin {
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(35, 0, 77, 0.2);
+  }
+  &__box {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+  }
+  &__input {
+    border: none;
+    outline: none;
+    font-size: var(--normal-font-size);
+    font-weight: 300;
+    width: 100%;
+
+    &::placeholder {
+      font-size: var(--normal-font-size);
+      font-family: var(--body-font);
+      color: darkgreen;
+    }
+  }
+  &__center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__button {
+    display: block;
+    padding: 0.6rem 1rem;
+    margin: 2rem 0;
+    background-color: darkgreen;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 0.5rem;
+  }
+}
