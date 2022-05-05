@@ -45,9 +45,6 @@ const admin = () => {
               justifyContent: "center",
             }}
           >
-            <button className={style.make2} onClick={() => showModal(true)}>
-              Create Article
-            </button>
             <button className={style.make2} onClick={() => showModal2(true)}>
               Create Admin
             </button>
@@ -57,7 +54,6 @@ const admin = () => {
         </div>
       </div>
       <Modal2 close={showModal2} showModal={modal2} />
-      <Modal close={showModal} showModal={modal} />
     </Layout>
   );
 };

@@ -17,22 +17,26 @@ export default function Dashboard() {
     console.log(value);
     setModal(value);
   };
-  
   React.useEffect(() => {
     // checks if the user is authenticated
     authContext.isUserAuthenticated()
       ? router.push("/admin/dashboard")
       : router.push("/");
   }, []);
-
   return (
     <Layout active="article">
       <div className={style.make}>
+        <div style={{}}>
+          <button className={style.make2} onClick={() => showModal(true)}>
+            Create Article
+          </button>
+        </div>
         <div className={styled.grid}>
           <Card />
           <Card />
           <Card />
         </div>
+        <Modal close={showModal} showModal={modal} />
       </div>
     </Layout>
   );

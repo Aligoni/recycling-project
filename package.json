@@ -11,6 +11,7 @@
     "@tinymce/tinymce-react": "^4.0.0",
     "axios": "^0.26.1",
     "boxicons": "^2.1.2",
+    "html-react-parser": "^1.4.12",
     "html2plaintext": "^2.1.4",
     "next": "12.1.4",
     "next-auth": "^4.3.4",
