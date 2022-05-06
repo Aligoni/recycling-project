@@ -8,6 +8,7 @@ import { AuthProvider, AuthContext } from "../context/auth-context";
 const SideNav = (props) => {
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
+
   const isActive = (name) => {
     if (name === props.active) {
       return style.active;
@@ -39,7 +40,7 @@ const SideNav = (props) => {
               </header>
               <Link href="/admin/dashboard">
                 <a
-                  className={`${isActive("article")} ${style.nav__link}`}
+                  className={`${isActive("article")} ${style.nav__link} mt-4`}
                 >
                   <i className={`bx bx-news ${style.nav__icon}`}></i>
                   <span className={style.nav__name}>Article</span>

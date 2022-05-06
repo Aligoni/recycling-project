@@ -38,9 +38,10 @@ export default function Home() {
 					setArticles(articles.data.data);
 				}
 				
-				setLoading(false);
+				setArtLoading(false);
       } catch (error) {
         console.log(error);
+        setArtLoading(false);
       }
     }
     getData();
@@ -104,26 +105,30 @@ export default function Home() {
 
       <section className='my-8'>
         <h1 className='text-center text-3xl underline'>Top Articles</h1>
-        <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
-          {
-            articles.filter((_, i) => i < 4).map((article, i) => (
-              <div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
-                <div className='w-full h-[70%]'>
-                  <img src={article.image} className='w-full h-full object-contain' />
-                </div>
-                <div className='px-4 py-2'>
-                  <div className='flex justify-between items-center'>
-                    <p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-                    <p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+        {
+          artLoading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
+              {
+                articles.filter((_, i) => i < 4).map((article, i) => (
+                  <div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
+                    <div className='w-full h-[70%]'>
+                      <img src={article.image} className='w-full h-full object-contain' />
+                    </div>
+                    <div className='px-4 py-2'>
+                      <div className='flex justify-between items-center'>
+                        <p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
+                        <p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+                      </div>
+                      <p className='text-3xl my-2'>{article.title}</p>
+                      <p>{article.preview}</p>
+                      <p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
+                    </div>
                   </div>
-                  <p className='text-3xl my-2'>{article.title}</p>
-                  <p>{article.preview}</p>
-                  <p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
-                </div>
-              </div>
-            ))
-          }
-        </div>
+                ))
+              }
+            </div>
+          )
+        }
       </section>
 
       <footer className={styles.footer}>

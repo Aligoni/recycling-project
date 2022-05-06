@@ -63,7 +63,9 @@ const Modal2 = (props) => {
       console.log(article);
       if (article.status == 200) {
         setSuccess(true);
-        setText('Posted Successfully')
+        setText('Posted Successfully');
+        props.close(false)
+        props.setRefresh(!props.refresh);
       }
       setLoading(false);
     } catch (error) {

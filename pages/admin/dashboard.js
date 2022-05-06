@@ -17,6 +17,7 @@ export default function Dashboard() {
   const authContext = React.useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(false);
 
   const [modal, setModal] = useState(false);
   const [articles, setArticles] = useState([]);
@@ -27,30 +28,30 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    // checks if the user is authenticated
-    authContext.isUserAuthenticated()
-      ? router.push("/admin/dashboard")
-      : router.push("/");
+    setLoading(true);
 
-      if (authContext.isUserAuthenticated()) {
-        const getData = async () => {
-          try {
-            const articles = await axios.get(`${server}/articles`);
-            console.log(articles.data);
+    if (!authContext.isUserAuthenticated()) {
+      router.push("/admin")
+      return;
+    }
 
-            if (articles.status == 200) {
-              setArticles(articles.data.data);
-            }
+    const getData = async () => {
+      try {
+        const articles = await axios.get(`${server}/articles`);
+        console.log(articles.data);
 
-            setLoading(false);
-          } catch (error) {
-            console.log(error);
-            setLoading(false);
-          }
+        if (articles.status == 200) {
+          setArticles(articles.data.data);
         }
-        getData();
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
       }
-  }, []);
+    }
+    getData();
+  }, [refresh]);
 
   return (
     <Layout active="article">
@@ -63,7 +64,7 @@ export default function Dashboard() {
             Create Article
           </button>
         </div>
-        <div className={styled.grid}>
+        <div className={'grid grid-cols-2 lg:grid-cols-4 gap-4'}>
           {
             loading ? <CircularProgress /> : (
               articles.map(article => (
@@ -72,7 +73,7 @@ export default function Dashboard() {
             )
           }
         </div>
-        <Modal close={showModal} showModal={modal} />
+        <Modal close={showModal} showModal={modal} refresh={refresh} setRefresh={setRefresh} />
       </div>
     </Layout>
   );

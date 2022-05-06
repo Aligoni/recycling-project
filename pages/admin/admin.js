@@ -64,7 +64,7 @@ const admin = () => {
 
   return (
     <Layout active="admin">
-      <div className="">
+      <div className="w-full max-w-6xl mx-auto my-4">
         <div>
           <div
             style={{
@@ -80,9 +80,9 @@ const admin = () => {
           
           {
             loading ? <CircularProgress /> : (
-              <>
+              <div>
                 {admins && <Table admins={admins} />}
-              </>
+              </div>
             )
           }
 

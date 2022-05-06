@@ -20,6 +20,7 @@
   height: 100vh;
 }
 .header {
+  @apply mb-4;
   width: 90px;
   height: var(--header-height);
   position: absolute;

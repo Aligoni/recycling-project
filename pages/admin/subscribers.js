@@ -41,7 +41,7 @@ const subscribers = () => {
 
   return (
     <Layout active="subscribers">
-      <div>
+      <div className="w-full max-w-6xl mx-auto my-4">
         <h3>Subscribers</h3>
         {
           loading ? <CircularProgress /> : (

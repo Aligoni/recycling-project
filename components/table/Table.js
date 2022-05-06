@@ -40,7 +40,6 @@ const Table = ({ admins, subscribers }) => {
                   </th>
                 );
               })}
-              <th>Action</th>
             </tr>
           );
         })}
@@ -53,9 +52,6 @@ const Table = ({ admins, subscribers }) => {
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps}>{cell.render("Cell")}</td>;
               })}
-              <td>
-                <a className={styles.btn}>suspend</a>
-              </td>
             </tr>
           );
         })}

@@ -24,7 +24,6 @@ const Card = ({ article }) => {
           <Link href={`/admin/article/${article.id}`}>
             <a>Read</a>
           </Link>
-          <a>Edit</a>
         </div>
       </article>
     </>
