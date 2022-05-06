@@ -1,0 +1,21 @@
+.top {
+    background-color: rgba(56, 53, 65, 0.315);
+    padding: 4px 12px;
+
+    .navtext {
+        font-size: 1.5em;
+        margin-right: 16px;
+
+        .item {
+            margin: 0 8px;
+            padding: 4px 6px;
+            cursor: pointer;
+            color: var(--text-white);
+            transition: color .2s ease-in-out;
+        }
+
+        .item:hover {
+            color: var(--primary-blue);
+        }
+    }
+}
