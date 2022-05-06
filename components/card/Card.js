@@ -1,28 +1,29 @@
 import React from "react";
+import Link from 'next/link';
 import styles from "./Card.module.scss";
-const Card = () => {
+
+const Card = ({ article }) => {
   return (
     <>
       <article className={`${styles.card__content} ${styles.grid}`}>
         <header className={styles.card__header}>
-          <img className={styles.card__header__img} src="/card.jpg" />
+          <div className="w-full h-40">
+            <img className={'w-full h-full object-contain'} src={article.image} />
+          </div>
           <div className={styles.card__flex}>
-            <h1 className={styles.card__header_title}>Title</h1>
+            <h1 className={styles.card__header_title}>{article.title}</h1>
             <span className={styles.card__header_time}>
               <i>25 min ago</i>
             </span>
           </div>
         </header>
         <p className={styles.card__body}>
-          Laborum nostrud irure officia est ullamco. Reprehenderit laboris dolor
-          amet aliquip deserunt enim in magna magna sunt irure ad consequat.
-          Dolore qui aliqua aliqua non velit nostrud magna id. Amet ea fugiat
-          tempor ut consectetur aliqua laborum officia quis sunt sunt ex id.
-          Nulla quis anim proident consectetur adipisicing elit sit sint. Culpa
-          tempor eiusmod aliqua consequat.
+          {article.summary}
         </p>
         <div className={styles.card__button}>
-          <a>Read</a>
+          <Link href={`/admin/article/${article.id}`}>
+            <a>Read</a>
+          </Link>
           <a>Edit</a>
         </div>
       </article>

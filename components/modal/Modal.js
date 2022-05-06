@@ -144,16 +144,6 @@ const Modal2 = (props) => {
                   init={{
                     height: 500,
                     menubar: false,
-                    // plugins: [
-                    //   'advlist autolink lists link image charmap print preview anchor',
-                    //   'searchreplace visualblocks code fullscreen',
-                    //   'insertdatetime media table paste code help wordcount'
-                    // ],
-                    // toolbar: 'undo redo | formatselect | ' +
-                    // 'bold italic backcolor | alignleft aligncenter ' +
-                    // 'alignright alignjustify | bullist numlist outdent indent | ' +
-                    // 'removeformat | help',
-                    // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                   }}
                 />
                 
@@ -179,29 +169,6 @@ const Modal2 = (props) => {
                   </button>
                 </div>
               </div>
-
-              {/* <Editor
-                id=""
-                apiKey="2h6tc69zo0ipq88ybfoezx1b73fsvn6sakvbig8v11ip6bmr"
-                onInit={(evt, editor) => (editorRef.current = editor)}
-                initialValue="<p>This is the initial content of the editor.</p>"
-                init={{
-                  height: 200,
-                  menubar: false,
-                  plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table paste code help wordcount",
-                  ],
-                  toolbar:
-                    "undo redo | formatselect | " +
-                    "bold italic backcolor | alignleft aligncenter " +
-                    "alignright alignjustify | bullist numlist outdent indent | " +
-                    "removeformat | help",
-                  content_style:
-                    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-                }}
-              /> */}
 
               {/* <form className={styles.login__createadmin}>
                 <div className={styles.login__box}>
