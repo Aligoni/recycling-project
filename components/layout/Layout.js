@@ -5,10 +5,8 @@ import SideNav from "../sidenav/SideNav";
 const Layout = (props) => {
   return (
     <div className={style.container}>
-      <div>
-        <SideNav active={props.active} />
-      </div>
-      <div className={style.flex}>{props.children}</div>
+      <SideNav active={props.active} />
+      <div className={style.flexContainer}>{props.children}</div>
     </div>
   );
 };

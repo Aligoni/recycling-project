@@ -35,7 +35,7 @@ const Table = ({ admins, subscribers }) => {
             <tr {...headerGroup.getHeaderGroupProps}>
               {headerGroup.headers.map((column) => {
                 return (
-                  <th {...column.getHeaderProps()}>
+                  <th>
                     {column.render("Header")}
                   </th>
                 );

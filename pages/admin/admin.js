@@ -64,7 +64,7 @@ const admin = () => {
 
   return (
     <Layout active="admin">
-      <div>
+      <div className="">
         <div>
           <div
             style={{

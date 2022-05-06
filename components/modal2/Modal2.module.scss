@@ -143,13 +143,15 @@
   opacity: 1;
   display: grid;
 }
+
 .show__modal .modal__content {
   transform: scale(1) translateY(0);
 }
+
 .make {
-  position: relative;
-  z-index: 4000;
+  @apply w-full;
 }
+
 .make2 {
   position: relative;
   z-index: 4000;
