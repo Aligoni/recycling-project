@@ -3,6 +3,7 @@ import { articles } from '../constants/articles';
 import { BsListUl } from 'react-icons/bs';
 import { FaBoxes } from 'react-icons/fa';
 
+import Footer from '../components/Footer'
 import styles from '../styles/Articles.module.scss';
 
 const Articles = () => {
@@ -81,6 +82,7 @@ const Articles = () => {
 					<p className='text-center text-gray-500 text-sm'>{articles.length} total articles</p>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	)
 }

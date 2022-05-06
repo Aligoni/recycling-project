@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.scss'
 import { FaFacebookF, FaGoogle, FaInstagram, FaTwitter } from 'react-icons/fa'
 import { IconContext } from 'react-icons';
 import { articles } from '../constants/articles';
+import Navbar from '../components/Navbar'
 
 import 'tailwindcss/tailwind.css'
 
@@ -13,23 +14,11 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Recycle-tronics!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <img src="/assets/backdrop.jpg" alt="" width="100%" height="100%"/>
         
         <div className={styles.overlay}>
-          <div className={styles.top +" flex w-full justify-between"}>
-            <img className="ml-4 mb-2 w-20 h-20 cursor-pointer" src="/logo.png" alt="" />
-            <div className={`${styles.navtext} flex items-center justify-between`}>
-              <p className={`${styles.item}`} onClick={() => router.push('/articles')}>Articles</p>
-              <p className={`${styles.item}`} onClick={() => router.push('/about')}>About</p>
-              <p className={`${styles.item}`}>Contact</p>
-            </div>
-          </div>
+          <Navbar router={router} />
           <div className="flex-1 flex flex-col justify-center items-center">
             <h1 className={styles.header}>Recycle-tronics!</h1>
             <h5 className={styles.headerMini}>

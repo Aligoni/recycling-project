@@ -32,3 +32,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+yarn.lock
+package-lock.json
+country_level_codebook.csv
+country_level_data_0.csv
+country_level_data.csv
