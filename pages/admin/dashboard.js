@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import Head from 'next/head';
 import { useRouter } from "next/router";
 import { AuthContext } from "../../components/context/auth-context";
 import Layout from "../../components/layout/Layout";
-import Modal2 from "../../components/modal2/Modal2";
+import Modal from "../../components/modal/Modal";
 import style from "../../components/modal2/Modal2.module.scss";
 import Card from "../../components/card/Card";
 import styled from "../../styles/CardGrid.module.scss";
@@ -25,6 +26,9 @@ export default function Dashboard() {
   }, []);
   return (
     <Layout active="article">
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <div className={style.make}>
         <div style={{}}>
           <button className={style.make2} onClick={() => showModal(true)}>
@@ -33,7 +37,7 @@ export default function Dashboard() {
         </div>
         <div className={styled.grid}>
           <Card />
-          <Card />
+          <Card />  
           <Card />
         </div>
         <Modal close={showModal} showModal={modal} />

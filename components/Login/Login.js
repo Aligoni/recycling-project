@@ -4,34 +4,62 @@ import { login } from "./api.auth";
 import { useRouter } from "next/router";
 import { AuthContext, AuthProvider } from "../context/auth-context";
 import Layout from "../layout/Layout";
+import axios from 'axios';
+import { server } from '../../constants/server';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [sucess, setSucess] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [sucess, setSuccess] = useState(false);
+  const [text, setText] = useState("");
+
   const authContext = React.useContext(AuthContext);
   const router = useRouter();
 
   const onEmailChange = (e) => {
-    const mail = e.target.value;
-    setEmail(mail);
+    setEmail(e.target.value);
   };
 
   const onPasswordChange = (e) => {
-    const mail = e.target.value;
-    setPassword(mail);
+    setPassword(e.target.value);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const result = await login({ email, password });
-    // console.log(result);
-    if (result) {
-      setEmail("");
-      setPassword("");
-      authContext.setAuthState(result);
-      router.push("/admin/dashboard");
+    setSuccess(false);
+    setError(false);
+    setText("");
+    setLoading(true);
+
+    if (!email || !password) {
+      setError(true);
+      setText("Please fill all fields");
+      setLoading(false);
+      return;
     }
+
+    const body = {
+      email,
+      password
+    }
+
+    try {
+      const login = await axios.post(`${server}/admins/login`, body);
+      
+      if (login.status == 200) {
+        console.log(login.data);
+        authContext.setAuthState(login.data.data.id);
+        router.push("/admin/dashboard");
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+
   };
 
   return (
@@ -65,7 +93,7 @@ function Login() {
               <input
                 type="submit"
                 className={styles.login__button}
-                value="Login"
+                value={loading ? "Loading..." : "Login"}
               />
             </div>
           </form>

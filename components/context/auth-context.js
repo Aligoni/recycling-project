@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = React.useState("");
 
   const setUserAuthInfo = (data) => {
-    const token = localStorage.setItem("token", JSON.stringify(data));
+    const token = localStorage.setItem("token", data);
     setAuthState(token);
   };
 

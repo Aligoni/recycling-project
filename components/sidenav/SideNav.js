@@ -17,7 +17,7 @@ const SideNav = (props) => {
 
   const logOut = () => {
     authContext.logout();
-    router.push("/");
+    router.push("/admin");
   };
   return (
     <>

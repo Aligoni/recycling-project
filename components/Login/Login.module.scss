@@ -59,6 +59,7 @@
     justify-content: center;
   }
   &__button {
+    @apply cursor-pointer hover:bg-green-500;
     display: block;
     padding: 0.6rem 1rem;
     margin: 2rem 0;

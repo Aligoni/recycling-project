@@ -1,1 +1,1 @@
-export const server = 'https://node-recycling-project-backend.herokuapp.com/';
+export const server = 'https://node-recycling-project-backend.herokuapp.com';
