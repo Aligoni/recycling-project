@@ -61,7 +61,7 @@ export default function Stats() {
                     <div className="flex-1 flex flex-col justify-center items-center">
                         <h1 className={styles.header}>World Statistics</h1>
                         <h5 className={styles.headerMini}>
-                            Help bring change to tde world
+                            Help bring change to the world
                         </h5>
                     </div>
                 </div>

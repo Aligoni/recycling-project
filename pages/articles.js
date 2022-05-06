@@ -1,14 +1,41 @@
-import { useState } from 'react';
-import { articles } from '../constants/articles';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { BsListUl } from 'react-icons/bs';
 import { FaBoxes } from 'react-icons/fa';
+import Footer from '../components/Footer';
+import { server } from '../constants/server';
+import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import Footer from '../components/Footer'
 import styles from '../styles/Articles.module.scss';
 
 const Articles = () => {
 
+	const router = useRouter();
+
 	const [view, setView] = useState(false);
+
+	const [loading, setLoading] = useState(true);
+	const [articles, setArticles] = useState([]);
+
+	useEffect(() => {
+		const getData = async () => {
+			try {
+				const articles = await axios.get(`${server}/articles`);
+				console.log(articles.data);
+
+				if (articles.status == 200) {
+					setArticles(articles.data.data);
+				}
+				
+				setLoading(false);
+			} catch (error) {
+				console.log(error);
+				setLoading(false);
+			}
+		}
+		getData();
+	}, []);
 
 	const onView = () => setView(true);
 	const offView = () => setView(false);
@@ -41,37 +68,42 @@ const Articles = () => {
 				</div>
 				<div className={`${styles['all-articles']} ${view ? 'grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto' : ''}`}>
 					{
+						loading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> :
 						!view ? (
 							articles.map((article, i) => (
-								<div className='flex justify-between items-center border-b-[1px] border-solid border-black p-4 w-4/5 max-w-7xl mx-auto hover:bg-gray-200 cursor-pointer' key={i}>
+								<div 
+									key={i}
+									onClick={() => router.push(`/articles/${article.id}`)}
+									className='flex justify-between items-center border-b-[1px] border-solid border-black p-4 w-4/5 max-w-7xl mx-auto hover:bg-gray-200 cursor-pointer' 
+								>
 									<div>
 										<div className='flex items-center'>
-											<p className='text-sm text-gray-500'>{article.author}</p>
+											<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
 											<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
 										</div>
 										<p className='text-3xl my-2'>{article.title}</p>
-										<p>{article.preview}</p>
-										<p className='text-sm text-gray-500 mt-2'>{article.read}</p>
+										<p>{article.summary}</p>
+										<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
 									</div>
 									<div className='w-20 h-20'>
-										<img src={article.img} className='w-full h-full' />
+										<img src={article.image} className='w-full h-full object-contain' />
 									</div>
-								</div>
+								</div>	
 							))
 						) : (
 							articles.map((article, i) => (
-								<div className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
-									<div className=''>
-										<img src={article.img} className='' />
+								<div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
+									<div className='w-full h-[70%]'>
+										<img src={article.image} className='w-full h-full object-contain' />
 									</div>
 									<div className='px-4 py-2'>
 										<div className='flex justify-between items-center'>
-											<p className='text-sm text-gray-500'>{article.author}</p>
+											<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
 											<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
 										</div>
 										<p className='text-3xl my-2'>{article.title}</p>
 										<p>{article.preview}</p>
-										<p className='text-sm text-gray-500 mt-2'>{article.read}</p>
+										<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
 									</div>
 								</div>
 							))

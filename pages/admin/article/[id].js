@@ -45,7 +45,7 @@ const Article = () => {
 				<p className='text-4xl cursor-pointer' onClick={() => router.push('/admin/dashboard')}>&larr;</p>
 			</div>
 			{
-				loading ? <CircularProgress /> : (
+				loading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
 					<>
 						<div className='w-full h-80'>
 							<img className={'w-full h-full object-contain'} src={article.image} />
