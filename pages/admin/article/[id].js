@@ -4,6 +4,7 @@ import axios from 'axios';
 import { server } from '../../../constants/server';
 import { AuthContext } from "../../../components/context/auth-context";
 import CircularProgress from '@mui/material/CircularProgress';
+import parse from 'html-react-parser'
 
 const Article = () => {
 	
@@ -51,7 +52,7 @@ const Article = () => {
 						</div>
 						<p className='text-lg text-gray-500'>Author: {article.admin.firstname} {article.admin.lastname}</p>
 						<h1 className='text-4xl text-center my-4'>{article.title}</h1>
-						<p>{article.content}</p>
+						<p>{parse(article.content)}</p>
 					</>
 				)
 			}
