@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.scss'
@@ -16,6 +16,9 @@ export default function Home() {
 
   const router = useRouter();
 
+  const [artLoading, setArtLoading] = useState(true);
+  const [articles, setArticles] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -24,6 +27,24 @@ export default function Home() {
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const articles = await axios.get(`${server}/articles`);
+				console.log(articles.data);
+
+				if (articles.status == 200) {
+					setArticles(articles.data.data);
+				}
+				
+				setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData();
+  }, []);
 
   const handleFirst = e => setFirst(e.target.value);
   const handleLast = e => setLast(e.target.value);
@@ -85,19 +106,19 @@ export default function Home() {
         <h1 className='text-center text-3xl underline'>Top Articles</h1>
         <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
           {
-            articles.map((article, i) => (
-              <div className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
-                <div className=''>
-                  <img src={article.img} className='' />
+            articles.filter((_, i) => i < 4).map((article, i) => (
+              <div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
+                <div className='w-full h-[70%]'>
+                  <img src={article.image} className='w-full h-full object-contain' />
                 </div>
                 <div className='px-4 py-2'>
                   <div className='flex justify-between items-center'>
-                    <p className='text-sm text-gray-500'>{article.author}</p>
+                    <p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
                     <p className='text-sm text-gray-500 ml-16'>{article.date}</p>
                   </div>
                   <p className='text-3xl my-2'>{article.title}</p>
                   <p>{article.preview}</p>
-                  <p className='text-sm text-gray-500 mt-2'>{article.read}</p>
+                  <p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
                 </div>
               </div>
             ))

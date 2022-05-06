@@ -70,7 +70,7 @@ const ArticleInfo = () => {
             {
                 loading? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
                     <div className='my-8 w-[90%] max-w-6xl mx-auto'>
-                        <p className='text-3xl cursor-pointer' onClick={() => router.push('/articles')} >&larr;</p>
+                        <p className='text-3xl cursor-pointer' onClick={() => router.back()} >&larr;</p>
                         <div className='w-full h-80'>
                             <img src={article?.image} className='w-full h-full object-contain' />
                         </div>
