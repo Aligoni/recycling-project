@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./SideNav.module.scss";
 import Head from "next/head";
-
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { AuthProvider, AuthContext } from "../context/auth-context";
@@ -38,29 +37,32 @@ const SideNav = (props) => {
                 </div>
                 <span>Recycler</span>
               </header>
-              <a
-                href="/admin/dashboard"
-                className={`${isActive("article")} ${style.nav__link}`}
-              >
-                <i className={`bx bx-news ${style.nav__icon}`}></i>
-                <span className={style.nav__name}>Article</span>
-              </a>
+              <Link href="/admin/dashboard">
+                <a
+                  className={`${isActive("article")} ${style.nav__link}`}
+                >
+                  <i className={`bx bx-news ${style.nav__icon}`}></i>
+                  <span className={style.nav__name}>Article</span>
+                </a>
+              </Link>
 
-              <a
-                href="/admin/admin"
-                className={`${isActive("admin")} ${style.nav__link}`}
-              >
-                <i className={`bx bx-user ${style.nav__icon}`}></i>
-                <span className={style.nav__name}>Admin</span>
-              </a>
+              <Link href="/admin/admin">
+                <a
+                  className={`${isActive("admin")} ${style.nav__link}`}
+                >
+                  <i className={`bx bx-user ${style.nav__icon}`}></i>
+                  <span className={style.nav__name}>Admin</span>
+                </a>
+              </Link>
 
-              <a
-                href="/admin/subscribers"
-                className={`${isActive("subscribers")} ${style.nav__link}`}
-              >
-                <i className={`bx bx-lock ${style.nav__icon}`}></i>
-                <span className={style.nav__name}>Subscribers</span>
-              </a>
+              <Link href="/admin/subscribers">
+                <a
+                  className={`${isActive("subscribers")} ${style.nav__link}`}
+                >
+                  <i className={`bx bx-lock ${style.nav__icon}`}></i>
+                  <span className={style.nav__name}>Subscribers</span>
+                </a>
+              </Link>
             </div>
           </div>
           <a onClick={logOut} className={style.nav__link}>
