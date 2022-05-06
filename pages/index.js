@@ -1,16 +1,69 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.scss'
 import { FaFacebookF, FaGoogle, FaInstagram, FaTwitter } from 'react-icons/fa'
 import { IconContext } from 'react-icons';
 import { articles } from '../constants/articles';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar';
+import CircularProgress from '@mui/material/CircularProgress';
+import axios from 'axios';
+import { server } from '../constants/server';
 
 import 'tailwindcss/tailwind.css'
 
 export default function Home() {
 
   const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [text, setText] = useState("");
+
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleFirst = e => setFirst(e.target.value);
+  const handleLast = e => setLast(e.target.value);
+  const handleEmail = e => setEmail(e.target.value);
+
+  const subscribe = async () => {
+    setError(false);
+    setSuccess(false);
+    setText("");
+    setLoading(true);
+
+    if (!first || !last || !email) {
+      setError(true);
+      setText("Please fill all fields");
+      setLoading(false);
+      return;
+    }
+
+    const body = {
+      firstname: first,
+      lastname: last,
+      email,
+    }
+
+    try {
+      const sub = await axios.post(`${server}/subscribers`, body);
+      console.log(sub.data);
+
+      if (sub.status == 200) {
+        setSuccess(true);
+        setText("Subscription Succesful");
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError(true);
+      setText("Email already subscribed");
+      setLoading(false);
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -55,12 +108,25 @@ export default function Home() {
       <footer className={styles.footer}>
         <div className="flex justify-evenly pt-8" style={{ backgroundColor: "rgb(19, 19, 19)" }}>
           <img className="m-10 w-28 h-32" src="/logo.png" alt="" />
-          <div className="m-10 px-10 text-center" style={{ width: '30%' }}>
-            <p className="text-2xl text-gray-200">About This Website</p>
-            <p className="text-lg text-gray-400">
-              Ut non ex leo. Vestibulum facilisis leo eu mauris tincidunt dapibus. Sed
-              Ut non ex leo. Vestibulum facilisis leo eu mauris tincidunt dapibus. Sed
-            </p>
+          <div className={styles['input-cont']} style={{ width: '30%' }}>
+              {
+                (error || success) && (
+                  <div className={`${error ? 'bg-red-300 text-red-600' : 'bg-green-300 text-green-600'} px-4 py-2 text-center block`} >
+                    {text}
+                  </div>
+                )
+              }
+            <p className='text-white'>Subscribe Now!</p>
+            <input type='text' placeholder='First Name' value={first} onChange={handleFirst} />
+            <input type='text' placeholder='Last Name' value={last} onChange={handleLast} />
+            <input type='text' placeholder='Email' value={email} onChange={handleEmail} />
+            <div>
+              <button onClick={subscribe}>
+                {
+                  loading ? <CircularProgress className='text-white' /> : 'Subscribe'
+                }
+              </button>
+            </div>
           </div>
           <div className="m-10" style={{ width: '30%' }}>
             <p className="text-2xl text-gray-200 text-center">Where you can find us</p>
