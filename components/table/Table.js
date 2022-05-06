@@ -3,9 +3,15 @@ import { useTable } from "react-table";
 import { COLUMNS, mockData } from "./columns";
 import styles from "./Table.module.scss";
 
-const Table = () => {
+const Table = ({ admins }) => {
+  
+  
+  const dataInfo = admins.map((admin, i) => {
+    return { "s/n": i+1, email: admin.email, name: `${admin.firstname} ${admin.lastname}` }
+  })
+
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => mockData, []);
+  const data = useMemo(() => dataInfo, []);
 
   const tabeInstance = useTable({
     columns,
