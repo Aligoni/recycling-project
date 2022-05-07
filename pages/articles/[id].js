@@ -5,6 +5,7 @@ import { server } from '../../constants/server';
 import CircularProgress from '@mui/material/CircularProgress';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import parse from 'html-react-parser';
+import Navbar from '../../components/Navbar';
 
 const ArticleInfo = () => {
 
@@ -67,6 +68,7 @@ const ArticleInfo = () => {
 
     return (
         <div>
+            <Navbar nothome={true} />
             {
                 loading? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
                     <div className='my-8 w-[90%] max-w-6xl mx-auto'>

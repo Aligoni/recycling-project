@@ -93,7 +93,7 @@ export default function Home() {
         <img src="/assets/backdrop.jpg" alt="" width="100%" height="100%"/>
         
         <div className={styles.overlay}>
-          <Navbar router={router} />
+          <Navbar />
           <div className="flex-1 flex flex-col justify-center items-center">
             <h1 className={styles.header}>Recycle-tronics!</h1>
             <h5 className={styles.headerMini}>

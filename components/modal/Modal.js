@@ -144,7 +144,7 @@ const Modal2 = (props) => {
                   onInit={(evt, editor) => editorRef.current = editor}
                   apiKey="2h6tc69zo0ipq88ybfoezx1b73fsvn6sakvbig8v11ip6bmr"
                   init={{
-                    height: 500,
+                    height: 250,
                     menubar: false,
                   }}
                 />

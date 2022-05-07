@@ -1,8 +1,10 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 const About = () => {
   return (
     <div>
+      <Navbar nothome={true} />
       <div className="w-full h-[30rem] flex justify-center items-center bg-[url('/assets/header.jpg')] bg-cover bg-top relative">
         <div className='absolute w-full h-full bg-black bg-opacity-50'></div>
         <h1 className='text-6xl text-white z-10'>About</h1>

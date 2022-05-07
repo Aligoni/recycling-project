@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import { server } from '../constants/server';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
+import Navbar from '../components/Navbar';
 
 import styles from '../styles/Articles.module.scss';
 
@@ -45,77 +46,80 @@ const Articles = () => {
 	}
 	
 	return (
-		<div className={styles['articles-cont']}>
-			<div className="w-full h-[30rem] flex justify-center items-center bg-[url('/assets/icon.jpg')] bg-cover bg-bottom relative">
-				<div className='absolute w-full h-full bg-black bg-opacity-50'></div>
-				<h1 className='text-6xl text-white z-10'>Articles</h1>
-			</div>
-			<div className={styles.content}>
-				<form onSubmit={onSubmit}>
-					<input type='text' placeholder='Search for article'  />
-					<button>Search</button>
-				</form>
+		<>
+			<div className={styles['articles-cont']}>
+				<Navbar nothome={true} />
+				<div className="w-full h-[30rem] flex justify-center items-center bg-[url('/assets/icon.jpg')] bg-cover bg-bottom relative">
+					<div className='absolute w-full h-full bg-black bg-opacity-50'></div>
+					<h1 className='text-6xl text-white z-10'>Articles</h1>
+				</div>
+				<div className={styles.content}>
+					<form onSubmit={onSubmit}>
+						<input type='text' placeholder='Search for article'  />
+						<button>Search</button>
+					</form>
 
-				<div className='flex justify-end items-center mx-8 my-4'>
-					<div className='flex justify-center items-center'>
-						<div onClick={offView} className={`border-solid border-2 border-gray-500 cursor-pointer px-2 py-1 rounded-l-md ${!view ? 'bg-gray-500' : ''}`}>
-							<BsListUl />
-						</div>
-						<div onClick={onView} className={`border-solid border-2 border-gray-500 cursor-pointer px-2 py-1 rounded-r-md ${view ? 'bg-gray-500' : ''}`}>
-							<FaBoxes />
+					<div className='flex justify-end items-center mx-8 my-4'>
+						<div className='flex justify-center items-center'>
+							<div onClick={offView} className={`border-solid border-2 border-gray-500 cursor-pointer px-2 py-1 rounded-l-md ${!view ? 'bg-gray-500' : ''}`}>
+								<BsListUl />
+							</div>
+							<div onClick={onView} className={`border-solid border-2 border-gray-500 cursor-pointer px-2 py-1 rounded-r-md ${view ? 'bg-gray-500' : ''}`}>
+								<FaBoxes />
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className={`${styles['all-articles']} ${view ? 'grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto' : ''}`}>
-					{
-						loading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> :
-						!view ? (
-							articles.map((article, i) => (
-								<div 
-									key={i}
-									onClick={() => router.push(`/articles/${article.id}`)}
-									className='flex justify-between items-center border-b-[1px] border-solid border-black p-4 w-4/5 max-w-7xl mx-auto hover:bg-gray-200 cursor-pointer' 
-								>
-									<div>
-										<div className='flex items-center'>
-											<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-											<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+					<div className={`${styles['all-articles']} ${view ? 'grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto' : ''}`}>
+						{
+							loading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> :
+							!view ? (
+								articles.map((article, i) => (
+									<div 
+										key={i}
+										onClick={() => router.push(`/articles/${article.id}`)}
+										className='flex justify-between items-center border-b-[1px] border-solid border-black p-4 w-4/5 max-w-7xl mx-auto hover:bg-gray-200 cursor-pointer' 
+									>
+										<div>
+											<div className='flex items-center'>
+												<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
+												<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+											</div>
+											<p className='text-3xl my-2'>{article.title}</p>
+											<p>{article.summary}</p>
+											<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
 										</div>
-										<p className='text-3xl my-2'>{article.title}</p>
-										<p>{article.summary}</p>
-										<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
-									</div>
-									<div className='w-20 h-20'>
-										<img src={article.image} className='w-full h-full object-contain' />
-									</div>
-								</div>	
-							))
-						) : (
-							articles.map((article, i) => (
-								<div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
-									<div className='w-full h-[70%]'>
-										<img src={article.image} className='w-full h-full object-contain' />
-									</div>
-									<div className='px-4 py-2'>
-										<div className='flex justify-between items-center'>
-											<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-											<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+										<div className='w-20 h-20'>
+											<img src={article.image} className='w-full h-full object-contain' />
 										</div>
-										<p className='text-3xl my-2'>{article.title}</p>
-										<p>{article.preview}</p>
-										<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
+									</div>	
+								))
+							) : (
+								articles.map((article, i) => (
+									<div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
+										<div className='w-full h-[70%]'>
+											<img src={article.image} className='w-full h-full object-contain' />
+										</div>
+										<div className='px-4 py-2'>
+											<div className='flex justify-between items-center'>
+												<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
+												<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+											</div>
+											<p className='text-3xl my-2'>{article.title}</p>
+											<p>{article.preview}</p>
+											<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
+										</div>
 									</div>
-								</div>
-							))
-						)
-					}
+								))
+							)
+						}
+					</div>
+					<div className='w-full mt-8'>
+						<p className='text-center text-gray-500 text-sm'>{articles.length} total articles</p>
+					</div>
 				</div>
-				<div className='w-full mt-8'>
-					<p className='text-center text-gray-500 text-sm'>{articles.length} total articles</p>
-				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
+		</>
 	)
 }
 

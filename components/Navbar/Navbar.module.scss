@@ -1,6 +1,25 @@
 .top {
+    @apply py-2 px-3;
     background-color: rgba(56, 53, 65, 0.315);
-    padding: 4px 12px;
+
+    &.textBlack {
+        .navtext {
+            font-size: 1.5em;
+            margin-right: 16px;
+
+            .item {
+                margin: 0 8px;
+                padding: 4px 6px;
+                cursor: pointer;
+                color: black;
+                transition: color .2s ease-in-out;
+            }
+
+            .item:hover {
+                color: var(--primary-blue);
+            }
+        }
+    }
 
     .navtext {
         font-size: 1.5em;

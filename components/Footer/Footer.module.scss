@@ -1,0 +1,22 @@
+.footer {
+    .input-cont {
+      @apply m-10 px-10;
+  
+      p {
+        @apply text-xl;
+      }
+  
+      input {
+        @apply block my-2 px-4 py-2 w-full rounded-md;
+      }
+  
+      div {
+        @apply flex justify-end items-center;
+  
+        button {
+          @apply text-white px-4 py-2 rounded-md border-2 border-solid border-white hover:bg-white hover:text-black min-w-[10rem];
+        }
+      }
+      
+    }
+  }
