@@ -6,6 +6,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import parse from 'html-react-parser';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
+import ReactTimeAgo from 'react-time-ago'
 
 const ArticleInfo = () => {
 
@@ -76,7 +78,12 @@ const ArticleInfo = () => {
                         <div className='w-full h-80'>
                             <img src={article?.image} className='w-full h-full object-contain' />
                         </div>
-						<p className='text-lg text-gray-500'>Author: {article?.admin.firstname} {article?.admin.lastname}</p>
+                        <div className="flex justify-between">
+						    <p className='text-lg text-gray-500'>Author: {article?.admin.firstname} {article?.admin.lastname}</p>
+                            <p className='text-sm text-gray-500'>
+                                <i><ReactTimeAgo date={new Date(article?.createdAt).getTime()} /></i>
+                            </p>
+                        </div>
 						<h1 className='text-4xl text-center my-4'>
                             {article?.title} {'  '}
                             {liked ? 
@@ -87,6 +94,7 @@ const ArticleInfo = () => {
                     </div>
                 )
             }
+            <Footer />
         </div>
     )
 }

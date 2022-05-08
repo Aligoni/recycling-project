@@ -59,7 +59,7 @@ export default function Dashboard() {
         <title>Dashboard</title>
       </Head>
       <div className={style.make}>
-        <div>
+        <div className="text-center">
           <button className={style.make2} onClick={() => showModal(true)}>
             Create Article
           </button>

@@ -10,7 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 import { server } from '../constants/server';
 import Footer from '../components/Footer';
-
+import ReactTimeAgo from 'react-time-ago'
 import 'tailwindcss/tailwind.css'
 
 export default function Home() {
@@ -19,15 +19,6 @@ export default function Home() {
 
   const [artLoading, setArtLoading] = useState(true);
   const [articles, setArticles] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [text, setText] = useState("");
-
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const getData = async () => {
@@ -48,45 +39,21 @@ export default function Home() {
     getData();
   }, []);
 
-  const handleFirst = e => setFirst(e.target.value);
-  const handleLast = e => setLast(e.target.value);
-  const handleEmail = e => setEmail(e.target.value);
-
-  const subscribe = async () => {
-    setError(false);
-    setSuccess(false);
-    setText("");
-    setLoading(true);
-
-    if (!first || !last || !email) {
-      setError(true);
-      setText("Please fill all fields");
-      setLoading(false);
-      return;
-    }
-
-    const body = {
-      firstname: first,
-      lastname: last,
-      email,
-    }
-
-    try {
-      const sub = await axios.post(`${server}/subscribers`, body);
-      console.log(sub.data);
-
-      if (sub.status == 200) {
-        setSuccess(true);
-        setText("Subscription Succesful");
+  useEffect(() => {
+    const params = router.query
+    console.log(params)
+    if (params.unsubscribed) {
+      if (params.unsubscribed == 'yes') {
+        if (!window.alert("You've unsubscribed successfully")) {
+          router.push('/')
+        }
+      } else if (params.unsubscribed === 'not-found') {
+        if (!window.alert("You've unsubscribed successfully")) {
+          router.push('/')
+        }
       }
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError(true);
-      setText("Email already subscribed");
-      setLoading(false);
     }
-  }
+  }, [router.query])
 
   return (
     <div className={styles.container}>
@@ -108,20 +75,22 @@ export default function Home() {
         <h1 className='text-center text-3xl underline'>Top Articles</h1>
         {
           artLoading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
-            <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
+            <div className='grid md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
               {
                 articles.filter((_, i) => i < 4).map((article, i) => (
-                  <div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
-                    <div className='w-full h-[70%]'>
+                  <div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden bg-gray-100 rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
+                    <div className='w-full h-[60%]'>
                       <img src={article.image} className='w-full h-full object-contain' />
                     </div>
                     <div className='px-4 py-2'>
                       <div className='flex justify-between items-center'>
                         <p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-                        <p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+                        <p className='text-sm text-gray-500 ml-4'>
+                          <i><ReactTimeAgo date={new Date(article.createdAt).getTime()} /></i>
+                        </p>
                       </div>
                       <p className='text-3xl my-2'>{article.title}</p>
-                      <p>{article.preview}</p>
+                      <p>{article.summary}</p>
                       <p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
                     </div>
                   </div>

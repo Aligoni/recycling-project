@@ -7,6 +7,7 @@ import { server } from '../constants/server';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Navbar from '../components/Navbar';
+import ReactTimeAgo from 'react-time-ago'
 
 import styles from '../styles/Articles.module.scss';
 
@@ -97,7 +98,7 @@ const Articles = () => {
 							</div>
 						)
 					}
-					<div className={`${styles['all-articles']} ${view ? 'grid lg:grid-cols-4 md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto' : ''}`}>
+					<div className={`${styles['all-articles']} ${view ? 'grid md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto' : ''}`}>
 						{
 							loading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> :
 							toggleSearch ? (
@@ -116,7 +117,9 @@ const Articles = () => {
 											<div>
 												<div className='flex items-center'>
 													<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-													<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+													<p className='text-sm text-gray-500 ml-16'>
+														<i><ReactTimeAgo date={new Date(article.createdAt).getTime()} /></i>
+													</p>
 												</div>
 												<p className='text-3xl my-2'>{article.title}</p>
 												<p>{article.summary}</p>
@@ -136,7 +139,9 @@ const Articles = () => {
 											<div className='px-4 py-2'>
 												<div className='flex justify-between items-center'>
 													<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-													<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+													<p className='text-sm text-gray-500 ml-16'>
+														<i><ReactTimeAgo date={new Date(article.createdAt).getTime()} /></i>
+													</p>
 												</div>
 												<p className='text-3xl my-2'>{article.title}</p>
 												<p>{article.summary}</p>
@@ -156,7 +161,9 @@ const Articles = () => {
 										<div>
 											<div className='flex items-center'>
 												<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-												<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+												<p className='text-sm text-gray-500 ml-16'>
+													<i><ReactTimeAgo date={new Date(article.createdAt).getTime()} /></i>
+												</p>
 											</div>
 											<p className='text-3xl my-2'>{article.title}</p>
 											<p>{article.summary}</p>
@@ -170,16 +177,18 @@ const Articles = () => {
 							) : (
 								articles.map((article, i) => (
 									<div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
-										<div className='w-full h-[70%]'>
+										<div className='w-full h-[60%]'>
 											<img src={article.image} className='w-full h-full object-contain' />
 										</div>
 										<div className='px-4 py-2'>
 											<div className='flex justify-between items-center'>
 												<p className='text-sm text-gray-500'>{article.admin.firstname} {article.admin.lastname}</p>
-												<p className='text-sm text-gray-500 ml-16'>{article.date}</p>
+												<p className='text-sm text-gray-500 ml-16'>
+													<i><ReactTimeAgo date={new Date(article.createdAt).getTime()} /></i>
+												</p>
 											</div>
 											<p className='text-3xl my-2'>{article.title}</p>
-											<p>{article.preview}</p>
+											<p>{article.summary}</p>
 											<p className='text-sm text-gray-500 mt-2'>likes: {article.likes}</p>
 										</div>
 									</div>
@@ -188,7 +197,7 @@ const Articles = () => {
 						}
 					</div>
 					<div className='w-full mt-8'>
-						<p className='text-center text-gray-500 text-sm'>{toggleSearch ? searchResults.length : articles.length} total articles</p>
+						<p className='text-center text-gray-500 text-sm'>{toggleSearch ? searchResults.length : articles.length} article(s)</p>
 					</div>
 				</div>
 				<Footer />

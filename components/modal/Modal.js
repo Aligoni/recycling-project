@@ -50,6 +50,13 @@ const Modal2 = (props) => {
       return;
     }
 
+    if (summary.length > 220) {
+      setError(true)
+      setText("Summary text is too long")
+      setLoading(false)
+      return
+    }
+
     const fd = new FormData();
     fd.append('title', title);
     fd.append('summary', summary);
@@ -93,7 +100,6 @@ const Modal2 = (props) => {
                 : styles.modal__container
             }
           >
-            <h3 className={styles.modal__title}>Create Article</h3>
             <Head>
               <link
                 rel="stylesheet"
