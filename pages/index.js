@@ -48,7 +48,7 @@ export default function Home() {
           router.push('/')
         }
       } else if (params.unsubscribed === 'not-found') {
-        if (!window.alert("You've unsubscribed successfully")) {
+        if (!window.alert("User not subscribed")) {
           router.push('/')
         }
       }
