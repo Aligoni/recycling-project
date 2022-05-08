@@ -81,7 +81,7 @@ const ArticleInfo = () => {
                         <div className="flex justify-between">
 						    <p className='text-lg text-gray-500'>Author: {article?.admin.firstname} {article?.admin.lastname}</p>
                             <p className='text-sm text-gray-500'>
-                                <i><ReactTimeAgo date={new Date(article?.createdAt).getTime()} /></i>
+                                <i>{article?<ReactTimeAgo date={new Date(article?.createdAt).getTime()} />: ""}</i>
                             </p>
                         </div>
 						<h1 className='text-4xl text-center my-4'>
