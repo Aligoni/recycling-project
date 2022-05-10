@@ -143,6 +143,7 @@ const Modal2 = (props) => {
                     type="file"
                     className={styles.login__input}
                     onChange={handleImage}
+                    accept="image/*"
                   />
                 </div>
 

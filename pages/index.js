@@ -72,12 +72,12 @@ export default function Home() {
       </main>
 
       <section className='my-8'>
-        <h1 className='text-center text-3xl underline'>Top Articles</h1>
+        <h1 className='text-center text-3xl underline'>Latest Articles</h1>
         {
           artLoading ? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
             <div className='grid md:grid-cols-2 gap-4 w-4/5 max-w-7xl mx-auto'>
               {
-                articles.filter((_, i) => i < 4).map((article, i) => (
+                articles.filter((_, i) => i < 2).map((article, i) => (
                   <div onClick={() => router.push(`/articles/${article.id}`)} className='overflow-hidden bg-gray-100 rounded-md shadow-md mt-4 cursor-pointer hover:shadow-xl' key={i}>
                     <div className='w-full h-[60%]'>
                       <img src={article.image} className='w-full h-full object-contain' />

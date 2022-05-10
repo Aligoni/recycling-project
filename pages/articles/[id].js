@@ -74,23 +74,30 @@ const ArticleInfo = () => {
             {
                 loading? <div className='my-8 w-full h-80 flex justify-center items-center'><CircularProgress className='text-black' /></div> : (
                     <div className='my-8 w-[90%] max-w-6xl mx-auto text-xl'>
-                        <p className='text-3xl cursor-pointer' onClick={() => router.back()} >&larr;</p>
-                        <div className='w-full h-80'>
-                            <img src={article?.image} className='w-full h-full object-contain' />
-                        </div>
-                        <div className="flex justify-between">
-						    <p className='text-lg text-gray-500'>Author: {article?.admin.firstname} {article?.admin.lastname}</p>
-                            <p className='text-sm text-gray-500'>
-                                <i>{article?<ReactTimeAgo date={new Date(article?.createdAt).getTime()} />: ""}</i>
-                            </p>
-                        </div>
-						<h1 className='text-4xl text-center my-4'>
-                            {article?.title} {'  '}
-                            {liked ? 
-                                <BsHeartFill className='inline w-7 h-7 cursor-pointer' /> : <BsHeart onClick={likeArticle} className='inline w-7 h-7 cursor-pointer' />
-                            } 
-                        </h1>
-						<div>{article && parse(article?.content)}</div>
+                        <p className='text-3xl cursor-pointer' onClick={() => router.push('/articles')} >&larr;</p>
+                        {!article ?
+                            <div className="m-40 flex justify-center items-center">
+                                <p className="text-2xl">Article not found :(</p>
+                            </div> :
+                            <>
+                                <div className='w-full h-80'>
+                                    <img src={article?.image} className='w-full h-full object-contain' />
+                                </div>
+                                <div className="flex justify-between">
+                                    <p className='text-lg text-gray-500'>Author: {article?.admin.firstname} {article?.admin.lastname}</p>
+                                    <p className='text-sm text-gray-500'>
+                                        <i>{article ? <ReactTimeAgo date={new Date(article?.createdAt).getTime()} /> : ""}</i>
+                                    </p>
+                                </div>
+                                <h1 className='text-4xl text-center my-4'>
+                                    {article?.title} {'  '}
+                                    {liked ?
+                                        <BsHeartFill className='inline w-7 h-7 cursor-pointer' /> : <BsHeart onClick={likeArticle} className='inline w-7 h-7 cursor-pointer' />
+                                    }
+                                </h1>
+                                <div>{article && parse(article?.content)}</div>
+                            </>
+                        }
                     </div>
                 )
             }
