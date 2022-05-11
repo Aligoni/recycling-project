@@ -15,10 +15,10 @@ const AuthProvider = ({ children }) => {
   // checks if the user is authenticated or not
   const isUserAuthenticated = () => {
     const token = localStorage.getItem("token");
-    if (token === undefined) {
-      return false;
+    if (token) {
+      return true
     }
-    return true;
+    return false
   };
 
   const logout = () => {

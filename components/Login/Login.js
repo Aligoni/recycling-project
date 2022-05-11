@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Login.module.scss";
 import { login } from "./api.auth";
 import { useRouter } from "next/router";
@@ -13,11 +13,19 @@ function Login() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [sucess, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [text, setText] = useState("");
 
   const authContext = React.useContext(AuthContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (authContext.isUserAuthenticated()) {
+      setSuccess(true)
+      setText('Already Logged In')
+      router.replace('/admin/dashboard')
+    }
+  }, [])
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
@@ -52,11 +60,18 @@ function Login() {
       if (login.status == 200) {
         console.log(login.data);
         authContext.setAuthState(login.data.data.id);
+        setSuccess(true)
+        setText('Login Successfull')
         router.push("/admin/dashboard");
+      } else {
+        setError(true)
+        setText('Invalid username/password')
       }
       setLoading(false);
     } catch (error) {
       console.log(error);
+      setError(true)
+      setText('Invalid username/password')
       setLoading(false);
     }
 
@@ -71,6 +86,13 @@ function Login() {
         <div className={styles.login__forms}>
           <form className={styles.login__register} onSubmit={onSubmit}>
             <h1 className={styles.login__title}>Sign In</h1>
+            {
+              (error || success) && (
+                <div className={`${error ? 'bg-red-300 text-red-600' : 'bg-green-300 text-green-600'} px-4 py-2 text-center block`} >
+                  {text}
+                </div>
+              )
+            }
             <div className={styles.login__box}>
               <input
                 type="email"
