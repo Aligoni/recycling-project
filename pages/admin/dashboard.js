@@ -53,6 +53,13 @@ export default function Dashboard() {
     getData();
   }, [refresh]);
 
+  const onDelete = async (id) => {
+
+    const articles = await axios.delete(`${server}/articles/`+ id);
+    if (articles.status === 200){
+      setRefresh(!refresh)
+    }
+  }
   return (
     <Layout active="article">
       <Head>
@@ -68,7 +75,7 @@ export default function Dashboard() {
           {
             loading ? <CircularProgress /> : (
               articles.map(article => (
-                <Card key={article.id} article={article} />
+                <Card key={article.id} article={article} onDelete={() => onDelete(article.id)}/>
               ))
             )
           }

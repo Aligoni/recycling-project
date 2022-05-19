@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styles from "./Card.module.scss";
 import ReactTimeAgo from 'react-time-ago'
 
-const Card = ({ article }) => {
+const Card = ({ article, onDelete}) => {
   return (
     <>
       <article className={`${styles.card__content} ${styles.grid}`}>
@@ -24,10 +24,15 @@ const Card = ({ article }) => {
         <p className={styles.card__body}>
           {article.likes} like(s)
         </p>
-        <div className={styles.card__button}>
-          <Link href={`/admin/article/${article.id}`}>
-            <a>Read</a>
-          </Link>
+        <div className="flex items-center justify-center">
+          <div className={`${styles.card__button} flex-1 bg-green-800`}>
+            <Link href={`/admin/article/${article.id}`}>
+              <a>Read</a>
+            </Link>
+          </div>
+          <div className={`${styles.card__button} flex-1 bg-red-600 cursor-pointer`} onClick={onDelete}>
+            <a>Delete</a>
+          </div>
         </div>
       </article>
     </>
